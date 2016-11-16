@@ -104,10 +104,8 @@ void CombatCommander::updateAttackSquads()
         }
     }
 
-	if (mainAttackSquad.getUnits().size() > 10) {
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);
-	}
 	
 }
 

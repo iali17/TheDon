@@ -7,7 +7,7 @@ namespace Config
     {
         bool ConfigFileFound                = false;
         bool ConfigFileParsed               = false;
-        std::string ConfigFileLocation      = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/UAlbertaBot_Config";
+        std::string ConfigFileLocation      = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
     }
 
     namespace Strategy
@@ -20,8 +20,8 @@ namespace Config
         std::string WriteDir                = "bwapi-data/write/";
         bool GasStealWithScout              = false;
         bool ScoutHarassEnemy               = true;
-        bool UseEnemySpecificStrategy       = false;
-        bool FoundEnemySpecificStrategy     = false;
+        bool UseEnemySpecificStrategy       = true;
+        bool FoundEnemySpecificStrategy     = true;
     }
 
     namespace Modules							    

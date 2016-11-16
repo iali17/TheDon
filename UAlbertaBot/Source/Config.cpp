@@ -7,13 +7,13 @@ namespace Config
     {
         bool ConfigFileFound                = false;
         bool ConfigFileParsed               = false;
-        std::string ConfigFileLocation      = "bwapi-data/AI/UAlbertaBot_Config.txt";
+        std::string ConfigFileLocation      = "E:/Homework/CMPUT350/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
     }
 
     namespace Strategy
     {
         std::string ProtossStrategyName     = "Protoss_ZealotRush";
-        std::string TerranStrategyName      = "Terran_MarineRush";
+        std::string TerranStrategyName      = "Terran_4RaxMarine";
         std::string ZergStrategyName        = "Zerg_3HatchMuta";
         std::string StrategyName            = "Protoss_ZealotRush";
         std::string ReadDir                 = "bwapi-data/read/";
@@ -69,7 +69,7 @@ namespace Config
         bool DrawResourceInfo               = false;
         bool DrawWorkerInfo                 = false;
         bool DrawModuleTimers               = false;
-        bool DrawReservedBuildingTiles      = false;
+        bool DrawReservedBuildingTiles      = true;
         bool DrawCombatSimulationInfo       = false;
         bool DrawBuildingInfo               = false;
         bool DrawMouseCursorInfo            = false;

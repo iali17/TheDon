@@ -56,7 +56,7 @@
         "DrawWorkerInfo"            : false,
         "DrawMouseCursorInfo"       : false,
         "DrawBuildingInfo"          : false,
-        "DrawReservedBuildingTiles" : false,
+        "DrawReservedBuildingTiles" : true,
         "DrawBOSSStateInfo"         : false,
         "PrintModuleTimeout"        : false
     },
@@ -79,7 +79,7 @@
     "Strategy" :
     {
         "Protoss"                   : "Protoss_ZealotRush",
-        "Terran"                    : "Terran_MarineRush",
+        "Terran"                    : "Terran_4RaxMarines",
         "Zerg"                      : "Zerg_ZerglingRush",
         
         "ScoutGasSteal"             : false,

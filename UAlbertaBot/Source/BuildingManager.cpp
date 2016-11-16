@@ -426,7 +426,7 @@ BWAPI::TilePosition BuildingManager::getBuildingLocation(const Building & b)
 
         return tile;
     }
-
+	
     // set the building padding specifically
     int distance = b.type == BWAPI::UnitTypes::Protoss_Photon_Cannon ? 0 : Config::Macro::BuildingSpacing;
     if (b.type == BWAPI::UnitTypes::Protoss_Pylon && (numPylons < 3))

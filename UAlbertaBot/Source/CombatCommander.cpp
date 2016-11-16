@@ -35,7 +35,12 @@ void CombatCommander::initializeSquads()
     {
         SquadOrder zealotDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
         _squadData.addSquad("Drop", Squad("Drop", zealotDrop, DropPriority));
-    }
+	}
+	else if (Config::Strategy::StrategyName == "Terran_MarineDrop") 
+	{
+		SquadOrder marineDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
+		_squadData.addSquad("Drop", Squad("Drop", marineDrop, DropPriority));
+	}
 
     _initialized = true;
 }
@@ -109,7 +114,7 @@ void CombatCommander::updateAttackSquads()
 
 void CombatCommander::updateDropSquads()
 {
-    if (Config::Strategy::StrategyName != "Protoss_Drop" )
+    if (Config::Strategy::StrategyName != "Protoss_Drop" && Config::Strategy::StrategyName != "Terran_MarineDrop")
     {
         return;
     }

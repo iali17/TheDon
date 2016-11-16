@@ -21,8 +21,6 @@ void TransportManager::executeMicro(const BWAPI::Unitset & targets)
 		return;
 	}
 
-
-
 }
 
 void TransportManager::calculateMapEdgeVertices()
@@ -159,7 +157,7 @@ void TransportManager::moveTransport()
 	}
 	else
 	{
-		followPerimeter();
+		return;
 	}
 }
 

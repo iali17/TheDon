@@ -226,7 +226,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
         }
     }
 	//Added by Alex Nov 14
-	else if (Config::Strategy::StrategyName == "Terran_MarineDrops")
+	else if (Config::Strategy::StrategyName == "Terran_MarineDrop")
 	{
 		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
 

@@ -99,17 +99,21 @@ void CombatCommander::updateAttackSquads()
         // get every unit of a lower priority and put it into the attack squad
         if (!unit->getType().isWorker() && (unit->getType() != BWAPI::UnitTypes::Zerg_Overlord) && _squadData.canAssignUnitToSquad(unit, mainAttackSquad))
         {
+			
             _squadData.assignUnitToSquad(unit, mainAttackSquad);
         }
     }
 
-    SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
-    mainAttackSquad.setSquadOrder(mainAttackOrder);
+	if (mainAttackSquad.getUnits().size() > 10) {
+		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
+		mainAttackSquad.setSquadOrder(mainAttackOrder);
+	}
+	
 }
 
 void CombatCommander::updateDropSquads()
 {
-    if (Config::Strategy::StrategyName != "Protoss_Drop")
+    if (Config::Strategy::StrategyName != "Protoss_Drop" )
     {
         return;
     }

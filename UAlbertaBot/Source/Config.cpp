@@ -7,13 +7,17 @@ namespace Config
     {
         bool ConfigFileFound                = false;
         bool ConfigFileParsed               = false;
+<<<<<<< HEAD
         std::string ConfigFileLocation      = "C:/Users/Hussain/Desktop/git/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
+=======
+        std::string ConfigFileLocation      = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/UAlbertaBot_Config";
+>>>>>>> origin/master
     }
 
     namespace Strategy
     {
         std::string ProtossStrategyName     = "Protoss_ZealotRush";
-        std::string TerranStrategyName      = "Terran_MarineRush";
+        std::string TerranStrategyName      = "Terran_MarineDrop";
         std::string ZergStrategyName        = "Zerg_3HatchMuta";
         std::string StrategyName            = "Protoss_ZealotRush";
         std::string ReadDir                 = "bwapi-data/read/";
@@ -32,7 +36,7 @@ namespace Config
         bool UsingCombatCommander           = true;
         bool UsingBuildOrderSearch          = true;     // toggle use of Build Order Search, currently no backup
         bool UsingAutoObserver              = false;
-        bool UsingStrategyIO                = false;    // toggle the use of file io for strategy
+        bool UsingStrategyIO                = true;    // toggle the use of file io for strategy
         bool UsingUnitCommandManager        = false;    // handles all unit commands
 		
         // extra things, don't enable unless you know what they are
@@ -41,8 +45,8 @@ namespace Config
 
     namespace BotInfo
     {
-        std::string BotName                 = "UAlbertaBot";
-        std::string Authors                 = "Dave Churchill";
+        std::string BotName                 = "theDon";
+        std::string Authors                 = "Dave Churchill, Alex Brosda, Imran Ali, Hussain Khan";
         bool PrintInfoOnStart               = false;
     }
 
@@ -69,7 +73,7 @@ namespace Config
         bool DrawResourceInfo               = false;
         bool DrawWorkerInfo                 = false;
         bool DrawModuleTimers               = false;
-        bool DrawReservedBuildingTiles      = false;
+        bool DrawReservedBuildingTiles      = true;
         bool DrawCombatSimulationInfo       = false;
         bool DrawBuildingInfo               = false;
         bool DrawMouseCursorInfo            = false;

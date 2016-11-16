@@ -150,8 +150,10 @@ void TransportManager::moveTransport()
 	{
 		return;
 	}
-	
-	if (_to.isValid() && _from.isValid())
+	_from = _transportShip->getPosition();
+	//BWAPI::Broodwar->printf("FROM: [%d,%d]", _from.x, _from.y);
+	//BWAPI::Broodwar->printf("TO: [%d,%d]", _to.x, _to.y);
+	if (_to.isValid() && _from.isValid() && (_transportShip->getLoadedUnits().size() == 8))
 	{
 		followPerimeter(_to, _from);
 	}
@@ -172,8 +174,8 @@ void TransportManager::moveTroops()
 	
 	BWTA::BaseLocation * enemyBaseLocation = InformationManager::Instance().getMainBaseLocation(BWAPI::Broodwar->enemy());
 
-	if (enemyBaseLocation && (_transportShip->getDistance(enemyBaseLocation->getPosition()) < 300 || transportHP < 100)
-		&& _transportShip->canUnloadAtPosition(_transportShip->getPosition()))
+	if ( (enemyBaseLocation && (_transportShip->getDistance(enemyBaseLocation->getPosition()) < 500) || (transportHP < 100)
+		&& _transportShip->canUnloadAtPosition(_transportShip->getPosition())))
 	{
 		//unload troops 
 		//and return? 
@@ -189,6 +191,7 @@ void TransportManager::moveTroops()
 
 		//else unload
 		_transportShip->unloadAll(_transportShip->getPosition());
+		BWAPI::Broodwar->printf("Unloaded troops");
 	}
 	
 }

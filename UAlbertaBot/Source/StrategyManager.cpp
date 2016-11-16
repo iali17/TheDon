@@ -231,13 +231,13 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
 
 		if (numMarines > 6) {
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 12));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
 		}
 		if (numBay < 1) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
 		}
 		if (numMedics > 2) {
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 4));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 2));
 		}
 		if (numMarines > 16) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));

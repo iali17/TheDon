@@ -202,6 +202,9 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 	// the goal to return
 	std::vector<MetaPair> goal;
 
+	//added by alex Nov 15
+	int numDropship = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Dropship);
+
     int numWorkers      = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_SCV);
     int numCC           = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Command_Center);            
     int numMarines      = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Marine);
@@ -222,6 +225,19 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
             goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
         }
     }
+	//Added by Alex Nov 14
+	else if (Config::Strategy::StrategyName == "Terran_MarineDrops")
+	{
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
+
+		if (numMarines > 6) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 4));
+		}
+		if (numMedics > 2) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 2));
+		}
+	}
     else if (Config::Strategy::StrategyName == "Terran_4RaxMarines")
     {
 	    goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));

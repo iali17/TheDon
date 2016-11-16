@@ -35,7 +35,7 @@ void CombatCommander::initializeSquads()
     {
         SquadOrder zealotDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
         _squadData.addSquad("Drop", Squad("Drop", zealotDrop, DropPriority));
-	}
+    }
 	else if (Config::Strategy::StrategyName == "Terran_MarineDrop") 
 	{
 		SquadOrder marineDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
@@ -111,10 +111,9 @@ void CombatCommander::updateAttackSquads()
         }
     }
 
-	if (unitSquadCounter > 10) {
+	if (mainAttackSquad.getUnits().size() > 10) {
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);
-	}
 	
 }
 

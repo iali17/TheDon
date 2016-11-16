@@ -239,9 +239,20 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 		if (numMedics > 2) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 2));
 		}
-		if (numMarines > 16) {
+		if (numMarines > 16 || numVultures > 4) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
+		}
+		//
+		if (_enemyRace == BWAPI::Races::Protoss) { //BWAPI::Broodwar->enemy()->getRace()
+
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Vulture, numVultures + 8));
+			BWAPI::Broodwar->printf("Switching to vultures!!");
+		}
+		if (_enemyRace == BWAPI::Races::Zerg) { //BWAPI::Broodwar->enemy()->getRace()
+
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, 5));
+			BWAPI::Broodwar->printf("Switching to FireBat!!");
 		}
 	}
     else if (Config::Strategy::StrategyName == "Terran_4RaxMarines")
@@ -433,7 +444,7 @@ void StrategyManager::onEnd(const bool isWinner)
 void StrategyManager::setLearnedStrategy()
 {
     // we are currently not using this functionality for the competition so turn it off 
-    return;
+    //return;
 
     if (!Config::Modules::UsingStrategyIO)
     {

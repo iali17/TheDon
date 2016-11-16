@@ -20,8 +20,8 @@ namespace Config
         std::string WriteDir                = "bwapi-data/write/";
         bool GasStealWithScout              = false;
         bool ScoutHarassEnemy               = true;
-        bool UseEnemySpecificStrategy       = false;
-        bool FoundEnemySpecificStrategy     = false;
+        bool UseEnemySpecificStrategy       = true;
+        bool FoundEnemySpecificStrategy     = true;
     }
 
     namespace Modules							    

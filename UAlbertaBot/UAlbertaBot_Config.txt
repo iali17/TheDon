@@ -85,8 +85,8 @@
         "ScoutGasSteal"             : false,
         "ScoutHarassEnemy"          : true,
         
-        "ReadDirectory"             : "bwapi-data/read/",
-        "WriteDirectory"            : "bwapi-data/write/",
+        "ReadDirectory"             : "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/read/",
+        "WriteDirectory"            : "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/",
                 
         "UseEnemySpecificStrategy"  : true,
         "EnemySpecificStrategy"     :

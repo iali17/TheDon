@@ -13,7 +13,7 @@ namespace Config
     namespace Strategy
     {
         std::string ProtossStrategyName     = "Protoss_ZealotRush";
-        std::string TerranStrategyName      = "Terran_4RaxMarine";
+        std::string TerranStrategyName      = "Terran_MarineDrop";
         std::string ZergStrategyName        = "Zerg_3HatchMuta";
         std::string StrategyName            = "Protoss_ZealotRush";
         std::string ReadDir                 = "bwapi-data/read/";
@@ -32,7 +32,7 @@ namespace Config
         bool UsingCombatCommander           = true;
         bool UsingBuildOrderSearch          = true;     // toggle use of Build Order Search, currently no backup
         bool UsingAutoObserver              = false;
-        bool UsingStrategyIO                = false;    // toggle the use of file io for strategy
+        bool UsingStrategyIO                = true;    // toggle the use of file io for strategy
         bool UsingUnitCommandManager        = false;    // handles all unit commands
 		
         // extra things, don't enable unless you know what they are

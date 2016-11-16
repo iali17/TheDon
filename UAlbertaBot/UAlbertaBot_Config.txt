@@ -1,8 +1,8 @@
 {
     "Bot Info" :
     {
-        "BotName"                   : "UAlbertaBot",
-        "Authors"                   : "David Churchill",
+        "BotName"                   : "theDon",
+        "Authors"                   : "David Churchill, Alex Brosda, Imran Ali, Hussain Khan",
         "PrintInfoOnStart"          : false
     },
         
@@ -56,7 +56,7 @@
         "DrawWorkerInfo"            : false,
         "DrawMouseCursorInfo"       : false,
         "DrawBuildingInfo"          : false,
-        "DrawReservedBuildingTiles" : true,
+        "DrawReservedBuildingTiles" : false,
         "DrawBOSSStateInfo"         : false,
         "PrintModuleTimeout"        : false
     },
@@ -79,7 +79,7 @@
     "Strategy" :
     {
         "Protoss"                   : "Protoss_ZealotRush",
-        "Terran"                    : "Terran_4RaxMarines",
+        "Terran"                    : "Terran_MarineDrop",
         "Zerg"                      : "Zerg_ZerglingRush",
         
         "ScoutGasSteal"             : false,

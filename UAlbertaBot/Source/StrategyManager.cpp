@@ -216,6 +216,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
                         + UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Siege_Tank_Siege_Mode);
     int numBay          = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Engineering_Bay);
 
+	
     if (Config::Strategy::StrategyName == "Terran_MarineRush")
     {
 	    goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
@@ -228,10 +229,13 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 	//Added by Alex Nov 14
 	else if (Config::Strategy::StrategyName == "Terran_MarineDrop")
 	{
-		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
 
+		if (_enemyRace != BWAPI::Races::Protoss) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
+		}
 		if (numMarines > 6) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Stim_Packs, 1));
 		}
 		if (numBay < 1) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));

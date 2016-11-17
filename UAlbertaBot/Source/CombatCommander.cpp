@@ -69,7 +69,7 @@ void CombatCommander::update(const BWAPI::Unitset & combatUnits)
 	if (isSquadUpdateFrame())
 	{
         updateIdleSquad();
-        updateDropSquads();
+		updateDropSquads();
         updateScoutDefenseSquad();
 		updateDefenseSquads();
 		updateAttackSquads();
@@ -111,9 +111,10 @@ void CombatCommander::updateAttackSquads()
         }
     }
 
-	if (mainAttackSquad.getUnits().size() > 10) {
+	//if (mainAttackSquad.getUnits().size() > 10) {
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);
+	//}
 	
 }
 

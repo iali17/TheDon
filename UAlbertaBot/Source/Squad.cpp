@@ -145,6 +145,7 @@ void Squad::addUnitsToMicroManagers()
 	BWAPI::Unitset transportUnits;
     BWAPI::Unitset tankUnits;
     BWAPI::Unitset medicUnits;
+	BWAPI::Unitset marineUnits;
 
 	// add _units to micro managers
 	for (auto & unit : _units)
@@ -169,8 +170,8 @@ void Squad::addUnitsToMicroManagers()
 			{
 				transportUnits.insert(unit);
 			}
-			// select ranged _units
-			else if ((unit->getType().groundWeapon().maxRange() > 32) || (unit->getType() == BWAPI::UnitTypes::Protoss_Reaver) || (unit->getType() == BWAPI::UnitTypes::Zerg_Scourge))
+			// select ranged _units but dont add terran marines to ranged units
+			else if (unit->getType() != BWAPI::UnitTypes::Terran_Marine && ((unit->getType().groundWeapon().maxRange() > 32) || (unit->getType() == BWAPI::UnitTypes::Protoss_Reaver) || (unit->getType() == BWAPI::UnitTypes::Zerg_Scourge)))
 			{
 				rangedUnits.insert(unit);
 			}
@@ -178,6 +179,10 @@ void Squad::addUnitsToMicroManagers()
 			else if (unit->getType().groundWeapon().maxRange() <= 32)
 			{
 				meleeUnits.insert(unit);
+			}
+			else if (unit->getType() == BWAPI::UnitTypes::Terran_Marine)
+			{
+				marineUnits.insert(unit);
 			}
 		}
 	}
@@ -188,6 +193,7 @@ void Squad::addUnitsToMicroManagers()
 	_transportManager.setUnits(transportUnits);
     _tankManager.setUnits(tankUnits);
     _medicManager.setUnits(medicUnits);
+	_marineManager.setUnits(marineUnits);
 }
 
 // calculates whether or not to regroup

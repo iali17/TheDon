@@ -463,6 +463,7 @@ void StrategyManager::setLearnedStrategy()
 {
     // we are currently not using this functionality for the competition so turn it off 
     //return;
+	BWAPI::Broodwar->printf("strategy findering");
 
     if (!Config::Modules::UsingStrategyIO)
     {
@@ -484,11 +485,12 @@ void StrategyManager::setLearnedStrategy()
 
     // if our win rate with the current strategy is super high don't explore at all
     // also we're pretty confident in our base strategies so don't change if insufficient games have been played
-    if (strategyGamesPlayed < 5 || (strategyGamesPlayed > 0 && winRate > 0.49))
+    if (strategyGamesPlayed < 2 || (strategyGamesPlayed > 0 && winRate > 0.49))
     {
         BWAPI::Broodwar->printf("Still using default strategy");
         return;
-    }
+	}
+	//put else here
 
     // get the total number of games played so far with this race
     for (auto & kv : _strategies)
@@ -506,6 +508,7 @@ void StrategyManager::setLearnedStrategy()
     double bestUCBStrategyVal = std::numeric_limits<double>::lowest();
     for (auto & kv : _strategies)
     {
+		
         Strategy & strategy = kv.second;
         if (strategy._race != BWAPI::Broodwar->self()->getRace())
         {
@@ -519,10 +522,11 @@ void StrategyManager::setLearnedStrategy()
 
         if (val > bestUCBStrategyVal)
         {
+			BWAPI::Broodwar->printf("%s" , strategy._name);
             bestUCBStrategy = strategy._name;
             bestUCBStrategyVal = val;
         }
     }
-
+	BWAPI::Broodwar->printf("Learning!!");
     Config::Strategy::StrategyName = bestUCBStrategy;
 }

@@ -24,7 +24,7 @@ namespace Config
         bool GasStealWithScout              = false;
         bool ScoutHarassEnemy               = true;
         bool UseEnemySpecificStrategy       = true;
-        bool FoundEnemySpecificStrategy     = true;
+        bool FoundEnemySpecificStrategy     = false;
     }
 
     namespace Modules							    

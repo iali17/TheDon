@@ -5,12 +5,10 @@ using namespace UAlbertaBot;
 
 MarineManager::MarineManager()
 {
-	BWAPI::Broodwar->printf("constructed");
 }
 
 void MarineManager::executeMicro(const BWAPI::Unitset & targets)
 {
-	//BWAPI::Broodwar->printf("momma we made it");
 	assignTargetsOld(targets);
 }
 
@@ -20,10 +18,9 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 	const BWAPI::Unitset & rangedUnits = getUnits();
 
 	// figure out targets
-	bool z = false;
 	BWAPI::Unitset rangedUnitTargets;
 	std::copy_if(targets.begin(), targets.end(), std::inserter(rangedUnitTargets, rangedUnitTargets.end()), [](BWAPI::Unit u){ return u->isVisible(); });
-	
+
 	for (auto & rangedUnit : rangedUnits)
 	{
 		// train sub units such as scarabs or interceptors
@@ -41,21 +38,6 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 				if (target && Config::Debug::DrawUnitTargetInfo)
 				{
 					BWAPI::Broodwar->drawLineMap(rangedUnit->getPosition(), rangedUnit->getTargetPosition(), BWAPI::Colors::Purple);
-				}
-
-
-				//BWAPI::Unit marine = rangedUnit;
-				//if not already stimpacked, use stimpack
-				if (!(rangedUnit->isStimmed()))
-				{ 
-					if (rangedUnit->getHitPoints() > 25)
-					{
-						z = rangedUnit->useTech(0);
-						if (z == true)
-						{
-							BWAPI::Broodwar->printf("the stimpack has been successfully used");
-						}
-					}
 				}
 
 

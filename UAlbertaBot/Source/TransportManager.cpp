@@ -155,7 +155,9 @@ void TransportManager::moveTransport()
 	}
 	_from = _transportShip->getPosition();
 
-
+	if (_transportShip->getLoadedUnits().size() == 8) {
+		setTo(enemyBaseLocation->getPosition());
+	}
 	//BWAPI::Broodwar->printf("FROM: [%d,%d]", _from.x, _from.y);
 	//BWAPI::Broodwar->printf("TO: [%d,%d]", _to.x, _to.y);
 	if (_to.isValid() && _from.isValid() && (_transportShip->getLoadedUnits().size() == 8))

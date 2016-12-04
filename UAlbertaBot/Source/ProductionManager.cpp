@@ -342,6 +342,14 @@ void ProductionManager::create(BWAPI::Unit producer, BuildOrderItem & item)
         && !t.getUnitType().isAddon())
     {
         // send the building task to the building manager
+		//check for too many starports
+		if (t.getUnitType() == BWAPI::UnitTypes::Terran_Starport) {
+			static int starport_counter = 1;
+			starport_counter += 1;
+			if (starport_counter >=  1) {
+				return;
+			}
+		}
         BuildingManager::Instance().addBuildingTask(t.getUnitType(), BWAPI::Broodwar->self()->getStartLocation(), item.isGasSteal);
     }
     else if (t.getUnitType().isAddon())

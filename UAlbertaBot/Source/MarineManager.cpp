@@ -142,7 +142,7 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 
 		dps = damage / speed;
 		
-		if ((dps > highestdps) && (targethealth < lowesthealth))
+		if ((dps > highestdps) && (targethealth < lowesthealth) && distance <= BWAPI::UnitTypes::Terran_Marine.groundWeapon().maxRange())
 		{
 			highestdps = dps;
 			lowesthealth = targethealth;

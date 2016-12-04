@@ -108,7 +108,7 @@ void CombatCommander::updateAttackSquads()
 		{
 			if (unit->getType() == BWAPI::UnitTypes::Terran_Marine)
 			{
-				BWAPI::Broodwar->printf("marine ADDED to the attacksquad");
+				//BWAPI::Broodwar->printf("marine ADDED to the attacksquad");
 			}
 			_squadData.assignUnitToSquad(unit, mainAttackSquad);
 			++unitSquadCounter;

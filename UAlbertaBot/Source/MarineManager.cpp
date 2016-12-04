@@ -49,7 +49,7 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 						z = rangedUnit->useTech(0);
 						if (z == true)
 						{
-							BWAPI::Broodwar->printf("the stimpack has been successfully used");
+							//BWAPI::Broodwar->printf("the stimpack has been successfully used");
 						}
 					}
 				}

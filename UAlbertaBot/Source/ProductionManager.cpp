@@ -344,11 +344,12 @@ void ProductionManager::create(BWAPI::Unit producer, BuildOrderItem & item)
     {
         
 		//check for too many starports
-
-		if (t.getUnitType() == BWAPI::UnitTypes::Terran_Starport) {
-			int numstarports = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Starport);
-			if (numstarports >  1) {
-				return;
+		if (Config::Strategy::StrategyName == "Terran_MarineDrop") {
+			if (t.getUnitType() == BWAPI::UnitTypes::Terran_Starport) {
+				int numstarports = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Starport);
+				if (numstarports > 1) {
+					return;
+				}
 			}
 		}
 

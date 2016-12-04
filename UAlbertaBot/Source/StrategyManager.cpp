@@ -236,7 +236,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 	//Added by Alex Dec 4
 	else if (Config::Strategy::StrategyName == "Terran_AirSuperiority") {
 		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Wraith, numWraith + 4));
-		
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 4));
 		if (numWraith > 8) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Battlecruiser, 2));
 		}
@@ -252,7 +252,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
 				goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Stim_Packs, 1));
 			}
-			if (numBay < 1) {
+			if (numBay < 1 && numMarines > 15) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
 			}
 			if (numMarines > 16) {
@@ -267,16 +267,11 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 			
 			if (numMarines >= 10) { //BWAPI::Broodwar->enemy()->getRace()
 
-				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost, 2));
-				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 2));
+				//goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost, 2));
+				//goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 2));
 				BWAPI::Broodwar->printf("Switching to FireBat!!");
 			}
 
-		//}else {
-
-			//Config::Strategy::StrategyName = "Terran_VultureRush";
-			//BWAPI::Broodwar->printf("Switching to vultures!!");
-		//}
 		
 	}
     else if (Config::Strategy::StrategyName == "Terran_4RaxMarines")
@@ -312,7 +307,10 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
     }
 
 
-
+	if (InformationManager::Instance().enemyHasCloakedUnits())
+	{
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Science_Vessel, 1));
+	}
     if (shouldExpandNow())
     {
         goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Command_Center, numCC + 1));

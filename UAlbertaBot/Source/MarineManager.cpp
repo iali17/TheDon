@@ -133,6 +133,7 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 
 	for (const auto & target : targets)
 	{
+		double distance = rangedUnit->getDistance(target);
 		if (target->getType().groundWeapon() != Unknown)
 		{
 			damage = target->getType().groundWeapon().damageAmount();

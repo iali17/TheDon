@@ -25,7 +25,7 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 	{
 		// train sub units such as scarabs or interceptors
 		//trainSubUnits(rangedUnit);
-
+		bool z = false;
 		// if the order is to attack or defend
 		if (order.getType() == SquadOrderTypes::Attack || order.getType() == SquadOrderTypes::Defend)
 		{
@@ -40,6 +40,20 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 					BWAPI::Broodwar->drawLineMap(rangedUnit->getPosition(), rangedUnit->getTargetPosition(), BWAPI::Colors::Purple);
 				}
 
+				//BWAPI::Unit marine = rangedUnit;
+				//if not already stimpacked, use stimpack
+				if (!(rangedUnit->isStimmed()))
+				{
+					if (rangedUnit->getHitPoints() > 25)
+					{
+						z = rangedUnit->useTech(0);
+						if (z == true)
+						{
+							BWAPI::Broodwar->printf("the stimpack has been successfully used");
+						}
+					}
+				}
+				
 
 				// attack it
 				if (Config::Micro::KiteWithRangedUnits)

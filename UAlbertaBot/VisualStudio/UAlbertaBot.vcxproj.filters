@@ -153,7 +153,7 @@
     <ClCompile Include="..\Source\Logger.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="MarineManager.cpp">
+    <ClCompile Include="..\Source\MarineManager.cpp">
       <Filter>game\combat\micro</Filter>
     </ClCompile>
   </ItemGroup>
@@ -281,7 +281,7 @@
     <ClInclude Include="..\Source\GameHistory.hpp">
       <Filter>game\util</Filter>
     </ClInclude>
-    <ClInclude Include="MarineManager.h">
+    <ClInclude Include="..\Source\MarineManager.h">
       <Filter>game\combat\micro</Filter>
     </ClInclude>
   </ItemGroup>

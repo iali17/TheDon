@@ -20,12 +20,12 @@ namespace Config
         std::string TerranStrategyName      = "Terran_MarineDrop";
         std::string ZergStrategyName        = "Zerg_3HatchMuta";
         std::string StrategyName            = "Protoss_ZealotRush";
-        std::string ReadDir                 = "bwapi-data/read/";
-        std::string WriteDir                = "bwapi-data/write/";
+        std::string ReadDir                 = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/";
+        std::string WriteDir                = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/";
         bool GasStealWithScout              = false;
         bool ScoutHarassEnemy               = true;
-        bool UseEnemySpecificStrategy       = false;
-        bool FoundEnemySpecificStrategy     = false;
+        bool UseEnemySpecificStrategy       = true;
+        bool FoundEnemySpecificStrategy     = true;
     }
 
     namespace Modules							    

@@ -58,13 +58,24 @@ void Squad::update()
 		_rangedManager.regroup(regroupPosition);
         _tankManager.regroup(regroupPosition);
         _medicManager.regroup(regroupPosition);
+
+
+		_marineManager.regroup(regroupPosition);
 	}
 	else // otherwise, execute micro
 	{
 		_meleeManager.execute(_order);
 		_rangedManager.execute(_order);
+
+		if (_units.size() > 10)
+		{
+			_marineManager.execute(_order);
+		}
+		
+
         _tankManager.execute(_order);
         _medicManager.execute(_order);
+		_transportManager.setTo(_order.getPosition());
 		_transportManager.update();
 
 		_detectorManager.setUnitClosestToEnemy(unitClosestToEnemy());
@@ -157,6 +168,10 @@ void Squad::addUnitsToMicroManagers()
             {
                 medicUnits.insert(unit);
             }
+			else if (unit->getType() == BWAPI::UnitTypes::Terran_Marine)
+			{
+				marineUnits.insert(unit);
+			}
             else if (unit->getType() == BWAPI::UnitTypes::Terran_Siege_Tank_Siege_Mode || unit->getType() == BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode)
             {
                 tankUnits.insert(unit);
@@ -171,7 +186,7 @@ void Squad::addUnitsToMicroManagers()
 				transportUnits.insert(unit);
 			}
 			// select ranged _units but dont add terran marines to ranged units
-			else if (unit->getType() != BWAPI::UnitTypes::Terran_Marine && ((unit->getType().groundWeapon().maxRange() > 32) || (unit->getType() == BWAPI::UnitTypes::Protoss_Reaver) || (unit->getType() == BWAPI::UnitTypes::Zerg_Scourge)))
+			else if ((unit->getType().groundWeapon().maxRange() > 32) || (unit->getType() == BWAPI::UnitTypes::Protoss_Reaver) || (unit->getType() == BWAPI::UnitTypes::Zerg_Scourge))
 			{
 				rangedUnits.insert(unit);
 			}
@@ -179,10 +194,6 @@ void Squad::addUnitsToMicroManagers()
 			else if (unit->getType().groundWeapon().maxRange() <= 32)
 			{
 				meleeUnits.insert(unit);
-			}
-			else if (unit->getType() == BWAPI::UnitTypes::Terran_Marine)
-			{
-				marineUnits.insert(unit);
 			}
 		}
 	}

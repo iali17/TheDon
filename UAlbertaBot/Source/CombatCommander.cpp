@@ -36,6 +36,12 @@ void CombatCommander::initializeSquads()
         SquadOrder zealotDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
         _squadData.addSquad("Drop", Squad("Drop", zealotDrop, DropPriority));
     }
+	else if (Config::Strategy::StrategyName == "Terran_MarineDrop") 
+	{
+		SquadOrder marineDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
+		_squadData.addSquad("Drop", Squad("Drop", marineDrop, DropPriority));
+		_squadData.addSquad("DropAttack", Squad("DropAttack", marineDrop, DropPriority));
+	}
 
     _initialized = true;
 }
@@ -63,7 +69,7 @@ void CombatCommander::update(const BWAPI::Unitset & combatUnits)
 	if (isSquadUpdateFrame())
 	{
         updateIdleSquad();
-        updateDropSquads();
+		updateDropSquads();
         updateScoutDefenseSquad();
 		updateDefenseSquads();
 		updateAttackSquads();
@@ -88,6 +94,7 @@ void CombatCommander::updateIdleSquad()
 void CombatCommander::updateAttackSquads()
 {
     Squad & mainAttackSquad = _squadData.getSquad("MainAttack");
+	int unitSquadCounter = 0;
 
     for (auto & unit : _combatUnits)
     {
@@ -99,40 +106,52 @@ void CombatCommander::updateAttackSquads()
         // get every unit of a lower priority and put it into the attack squad
         if (!unit->getType().isWorker() && (unit->getType() != BWAPI::UnitTypes::Zerg_Overlord) && _squadData.canAssignUnitToSquad(unit, mainAttackSquad))
         {
-			
+			if (unit->getType() == BWAPI::UnitTypes::Terran_Marine)
+			{
+				BWAPI::Broodwar->printf("marine ADDED to the attacksquad");
+			}
             _squadData.assignUnitToSquad(unit, mainAttackSquad);
+			++unitSquadCounter;
         }
     }
 
-	if (mainAttackSquad.getUnits().size() > 10) {
+	//if (mainAttackSquad.getUnits().size() > 10) {
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);
-	}
+	//}
 	
 }
 
 void CombatCommander::updateDropSquads()
 {
-    if (Config::Strategy::StrategyName != "Protoss_Drop" )
+    if (Config::Strategy::StrategyName != "Protoss_Drop" && Config::Strategy::StrategyName != "Terran_MarineDrop")
     {
         return;
     }
 
     Squad & dropSquad = _squadData.getSquad("Drop");
+	Squad & attackingSquad = _squadData.getSquad("DropAttack");
 
     // figure out how many units the drop squad needs
     bool dropSquadHasTransport = false;
     int transportSpotsRemaining = 8;
-    auto & dropUnits = dropSquad.getUnits();
+    auto & dropUnits = attackingSquad.getUnits();
+	BWAPI::UnitInterface *dropShip;
 
     for (auto & unit : dropUnits)
     {
         if (unit->isFlying() && unit->getType().spaceProvided() > 0)
         {
+			dropShip = unit;
             dropSquadHasTransport = true;
         }
         else
         {
+			//Maybe loop twice, one to find the drop ship then start clicking on them.
+			/*if (dropSquadHasTransport)
+			{
+				unit->rightClick(dropShip);
+			}*/
             transportSpotsRemaining -= unit->getType().spaceRequired();
         }
     }
@@ -146,6 +165,7 @@ void CombatCommander::updateDropSquads()
             // if this is a transport unit and we don't have one in the squad yet, add it
             if (!dropSquadHasTransport && (unit->getType().spaceProvided() > 0 && unit->isFlying()))
             {
+				dropShip = unit;
                 _squadData.assignUnitToSquad(unit, dropSquad);
                 dropSquadHasTransport = true;
                 continue;
@@ -159,7 +179,11 @@ void CombatCommander::updateDropSquads()
             // get every unit of a lower priority and put it into the attack squad
             if (!unit->getType().isWorker() && _squadData.canAssignUnitToSquad(unit, dropSquad))
             {
-                _squadData.assignUnitToSquad(unit, dropSquad);
+				if (dropSquadHasTransport)
+				{
+					unit->rightClick(dropShip);
+				}
+				_squadData.assignUnitToSquad(unit, attackingSquad);
                 transportSpotsRemaining -= unit->getType().spaceRequired();
             }
         }
@@ -167,8 +191,15 @@ void CombatCommander::updateDropSquads()
     // otherwise the drop squad is full, so execute the order
     else
     {
-        SquadOrder dropOrder(SquadOrderTypes::Drop, getMainAttackLocation(), 800, "Attack Enemy Base");
+		for (auto & unit : dropUnits)
+		{
+			unit->rightClick(dropShip);
+		}
+
+        SquadOrder dropOrder(SquadOrderTypes::Drop, getMainAttackLocation(), 800, "Move To Enemy Base");
+		SquadOrder attackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Drop and Attack"); // this probably!
         dropSquad.setSquadOrder(dropOrder);
+		attackingSquad.setSquadOrder(attackOrder);
     }
 }
 

@@ -114,7 +114,7 @@ void MicroManager::execute(const SquadOrder & inputOrder)
 
 const BWAPI::Unitset & MicroManager::getUnits() const 
 { 
-    return _units; 
+	return _units;
 }
 
 void MicroManager::regroup(const BWAPI::Position & regroupPosition) const

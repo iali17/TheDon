@@ -49,7 +49,7 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 						z = rangedUnit->useTech(0);
 						if (z == true)
 						{
-							BWAPI::Broodwar->printf("the stimpack has been successfully used");
+							//BWAPI::Broodwar->printf("the stimpack has been successfully used");
 						}
 					}
 				}
@@ -81,13 +81,14 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 					// move to it
 					if (rangedUnits.size() > 10)
 					{
-					Micro::SmartAttackMove(rangedUnit, order.getPosition());
+						Micro::SmartAttackMove(rangedUnit, order.getPosition());
+					}
 				}
 			}
 		}
 	}
 }
-}
+
 
 std::pair<BWAPI::Unit, BWAPI::Unit> MarineManager::findClosestUnitPair(const BWAPI::Unitset & attackers, const BWAPI::Unitset & targets)
 {
@@ -122,7 +123,40 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 	double closestDist = std::numeric_limits<double>::infinity();
 	BWAPI::Unit closestTarget = nullptr;
 
+	double damage;
+	double speed;
+	double targethealth;
+	double dps;
+
+	double highestdps = -1000;
+	double lowesthealth = 1000;
+
 	for (const auto & target : targets)
+	{
+		double distance = rangedUnit->getDistance(target);
+		double LTD = UnitUtil::CalculateLTD(target, rangedUnit);
+		int priority = getAttackPriority(rangedUnit, target);
+		bool targetIsThreat = LTD > 0;
+
+		if (target->getType().groundWeapon() != Unknown)
+		{
+			damage = target->getType().groundWeapon().damageAmount();
+			speed = target->getType().groundWeapon().damageCooldown();
+			targethealth = target->getHitPoints();
+		}
+
+		dps = damage / speed;
+		
+		if ((dps > highestdps) && (targethealth < lowesthealth))
+		{
+			highestdps = dps;
+			lowesthealth = targethealth;
+			closestTarget = target;
+		}
+	}
+
+
+	/*for (const auto & target : targets)
 	{
 		double distance = rangedUnit->getDistance(target);
 		double LTD = UnitUtil::CalculateLTD(target, rangedUnit);
@@ -135,7 +169,7 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 			highPriority = priority;
 			closestTarget = target;
 		}
-	}
+	}*/
 
 	return closestTarget;
 }

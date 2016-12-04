@@ -140,6 +140,11 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 			targethealth = target->getHitPoints();
 		}
 
+		else
+		{
+			continue;
+		}
+
 		dps = damage / speed;
 		
 		if ((dps > highestdps) && (targethealth < lowesthealth))

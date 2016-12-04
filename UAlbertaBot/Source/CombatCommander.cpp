@@ -344,7 +344,8 @@ void CombatCommander::updateDefenseSquads()
 
         std::stringstream squadName;
         squadName << "Base Defense " << regionCenter.x << " " << regionCenter.y; 
-        
+
+
         // if there's nothing in this region to worry about
         if (enemyUnitsInRegion.empty())
         {

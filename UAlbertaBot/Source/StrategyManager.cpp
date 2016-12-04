@@ -236,14 +236,14 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 		if (_enemyRace != BWAPI::Races::Protoss) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
 
-			if (numMarines > 6) {
+			if (numMarines > 10) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
 				goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Stim_Packs, 1));
 			}
 			if (numBay < 1) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
 			}
-			if (numMarines > 3) {
+			if (numMarines > 16) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 1));
 			}
 			if (numMarines > 16 || numVultures > 4) {
@@ -283,11 +283,11 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
         {
 
             goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));
-            goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 4));
+            goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, numTanks + 4));
 
         }
     }
-    else if (Config::Strategy::StrategyName == "Terran_TankPush")
+	else if (Config::Strategy::StrategyName == "Terran_TankPush")
     {
         goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
         goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Goliath, numGoliath + 6));

@@ -67,10 +67,9 @@ void Squad::update()
 		_meleeManager.execute(_order);
 		_rangedManager.execute(_order);
 
-		if (_units.size() > 10)
-		{
-			_marineManager.execute(_order);
-		}
+
+		_marineManager.execute(_order);
+
 		
 
         _tankManager.execute(_order);

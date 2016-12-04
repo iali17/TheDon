@@ -69,6 +69,7 @@ void MicroManager::execute(const SquadOrder & inputOrder)
         if (_units.size() == 1 && (*_units.begin())->getType().isWorker())
         {
             executeMicro(nearbyEnemies);
+
         }
         // otherwise it is a normal attack force
         else
@@ -77,6 +78,7 @@ void MicroManager::execute(const SquadOrder & inputOrder)
             if (order.getType() == SquadOrderTypes::Defend)
             {
                 executeMicro(nearbyEnemies);
+				
             }
             // otherwise we only care about workers if they are in their own region
             else
@@ -106,6 +108,7 @@ void MicroManager::execute(const SquadOrder & inputOrder)
 		        }
 
 		        // Allow micromanager to handle enemies
+
 		        executeMicro(workersRemoved);
             }
         }

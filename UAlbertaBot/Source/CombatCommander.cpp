@@ -95,29 +95,39 @@ void CombatCommander::updateAttackSquads()
     Squad & mainAttackSquad = _squadData.getSquad("MainAttack");
 	int unitSquadCounter = 0;
 
-    for (auto & unit : _combatUnits)
-    {
-        if (unit->getType() == BWAPI::UnitTypes::Zerg_Scourge && UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Zerg_Hydralisk) < 30)
-        {
-            continue;
-        }
+	
+	for (auto & unit : _combatUnits)
+	{
+		if (unit->getType() == BWAPI::UnitTypes::Zerg_Scourge && UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Zerg_Hydralisk) < 30)
+		{
+			continue;
+		}
 
-        // get every unit of a lower priority and put it into the attack squad
-        if (!unit->getType().isWorker() && (unit->getType() != BWAPI::UnitTypes::Zerg_Overlord) && _squadData.canAssignUnitToSquad(unit, mainAttackSquad))
-        {
+		// get every unit of a lower priority and put it into the attack squad
+		if (!unit->getType().isWorker() && (unit->getType() != BWAPI::UnitTypes::Zerg_Overlord) && _squadData.canAssignUnitToSquad(unit, mainAttackSquad))
+		{
 			if (unit->getType() == BWAPI::UnitTypes::Terran_Marine)
 			{
 				BWAPI::Broodwar->printf("marine ADDED to the attacksquad");
 			}
-            _squadData.assignUnitToSquad(unit, mainAttackSquad);
+			_squadData.assignUnitToSquad(unit, mainAttackSquad);
 			++unitSquadCounter;
-        }
-    }
-
-	//if (mainAttackSquad.getUnits().size() > 10) {
+		}
+	}
+	
+	//(mainAttackSquad.getUnits().size() > 10)
+	//SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
+	//SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
+	//mainAttackSquad.setSquadOrder(mainAttackOrder);
+	if (mainAttackSquad.getUnits().size() > 10)
+	{
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);
-	//}
+	}
+	
+	
+	
+	//BWAPI::Broodwar->printf("count is %d, other count is %d", mainAttackSquad.getUnits().size(), unitSquadCounter);
 	
 }
 

@@ -65,7 +65,10 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 				if (rangedUnit->getDistance(order.getPosition()) > 100)
 				{
 					// move to it
-					Micro::SmartAttackMove(rangedUnit, order.getPosition());
+					if (rangedUnits.size() > 10)
+					{
+						Micro::SmartAttackMove(rangedUnit, order.getPosition());
+					}
 				}
 			}
 		}

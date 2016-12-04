@@ -67,12 +67,12 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 					// move to it
 					if (rangedUnits.size() > 10)
 					{
-						Micro::SmartAttackMove(rangedUnit, order.getPosition());
-					}
+					Micro::SmartAttackMove(rangedUnit, order.getPosition());
 				}
 			}
 		}
 	}
+}
 }
 
 std::pair<BWAPI::Unit, BWAPI::Unit> MarineManager::findClosestUnitPair(const BWAPI::Unitset & attackers, const BWAPI::Unitset & targets)

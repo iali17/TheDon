@@ -244,7 +244,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
 			}
 			if (numMarines > 3) {
-				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 2));
+				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 1));
 			}
 			if (numMarines > 16 || numVultures > 4) {
 				if (BWAPI::TechTypes::Tank_Siege_Mode.isValid()) {

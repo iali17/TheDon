@@ -216,6 +216,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 	int numWraith       = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Wraith);
     int numVultures     = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Vulture);
     int numGoliath      = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Goliath);
+	int numFireBat		= UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Firebat);
     int numTanks        = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode)
                         + UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Siege_Tank_Siege_Mode);
     int numBay          = UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Engineering_Bay);
@@ -228,13 +229,24 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
         {
             goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
         }
+		if (numMarines > 16) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
+		}
     }
+	//Added by Alex Dec 4
+	else if (Config::Strategy::StrategyName == "Terran_AirSuperiority") {
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Wraith, numWraith + 4));
+		
+		if (numWraith > 8) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Battlecruiser, 2));
+		}
+	}
 	//Added by Alex Nov 14
 	else if (Config::Strategy::StrategyName == "Terran_MarineDrop")
 	{
 
-		if (_enemyRace != BWAPI::Races::Protoss) {
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
+		//if (_enemyRace != BWAPI::Races::Protoss) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 10));
 
 			if (numMarines > 10) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
@@ -252,28 +264,29 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 				}
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
 			}
-			//
-			//if (_enemyRace == BWAPI::Races::Protoss) { //BWAPI::Broodwar->enemy()->getRace()
+			
+			if (numMarines >= 10) { //BWAPI::Broodwar->enemy()->getRace()
 
-			//	goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Vulture, numVultures + 8));
-
-			//}
-			if (_enemyRace == BWAPI::Races::Zerg) { //BWAPI::Broodwar->enemy()->getRace()
-
-				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, 5));
+				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost, 2));
+				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 2));
 				BWAPI::Broodwar->printf("Switching to FireBat!!");
 			}
 
-		}else {
+		//}else {
 
-			Config::Strategy::StrategyName = "Terran_VultureRush";
-			BWAPI::Broodwar->printf("Switching to vultures!!");
-		}
+			//Config::Strategy::StrategyName = "Terran_VultureRush";
+			//BWAPI::Broodwar->printf("Switching to vultures!!");
+		//}
 		
 	}
     else if (Config::Strategy::StrategyName == "Terran_4RaxMarines")
     {
 	    goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
+		if (numMarines > 16) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost, 2));
+		}
+
     }
     else if (Config::Strategy::StrategyName == "Terran_VultureRush")
     {

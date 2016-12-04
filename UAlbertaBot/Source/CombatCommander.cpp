@@ -5,9 +5,9 @@ using namespace UAlbertaBot;
 
 const size_t IdlePriority = 0;
 const size_t AttackPriority = 1;
-const size_t BaseDefensePriority = 2;
+const size_t BaseDefensePriority = 4;
 const size_t ScoutDefensePriority = 3;
-const size_t DropPriority = 4;
+const size_t DropPriority = 2;
 
 CombatCommander::CombatCommander() 
     : _initialized(false)
@@ -40,7 +40,6 @@ void CombatCommander::initializeSquads()
 	{
 		SquadOrder marineDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
 		_squadData.addSquad("Drop", Squad("Drop", marineDrop, DropPriority));
-		_squadData.addSquad("DropAttack", Squad("DropAttack", marineDrop, DropPriority));
 	}
 
     _initialized = true;
@@ -130,13 +129,14 @@ void CombatCommander::updateDropSquads()
     }
 
     Squad & dropSquad = _squadData.getSquad("Drop");
-	Squad & attackingSquad = _squadData.getSquad("DropAttack");
+	Squad & attackSquad = _squadData.getSquad("MainAttack");
 
     // figure out how many units the drop squad needs
     bool dropSquadHasTransport = false;
     int transportSpotsRemaining = 8;
-    auto & dropUnits = attackingSquad.getUnits();
+    auto & dropUnits = dropSquad.getUnits();
 	BWAPI::UnitInterface *dropShip;
+	BWAPI::Position basePosition = BWAPI::Position(BWAPI::Broodwar->self()->getStartLocation());
 
     for (auto & unit : dropUnits)
     {
@@ -148,11 +148,11 @@ void CombatCommander::updateDropSquads()
         else
         {
 			//Maybe loop twice, one to find the drop ship then start clicking on them.
-			/*if (dropSquadHasTransport)
+			if (dropSquadHasTransport && (unit->getDistance(basePosition) < 500))
 			{
 				unit->rightClick(dropShip);
-			}*/
-            transportSpotsRemaining -= unit->getType().spaceRequired();
+			}
+			transportSpotsRemaining -= unit->getType().spaceRequired();
         }
     }
 
@@ -177,14 +177,18 @@ void CombatCommander::updateDropSquads()
             }
 
             // get every unit of a lower priority and put it into the attack squad
-            if (!unit->getType().isWorker() && _squadData.canAssignUnitToSquad(unit, dropSquad))
+            if (!unit->getType().isWorker() && _squadData.canAssignUnitToSquad(unit, dropSquad) && (unit->getDistance(basePosition) < 500))
             {
-				if (dropSquadHasTransport)
-				{
+				if (dropSquadHasTransport) {
+					_squadData.assignUnitToSquad(unit, dropSquad);
 					unit->rightClick(dropShip);
+					transportSpotsRemaining -= unit->getType().spaceRequired();
 				}
-				_squadData.assignUnitToSquad(unit, attackingSquad);
-                transportSpotsRemaining -= unit->getType().spaceRequired();
+				else {
+					if (_squadData.canAssignUnitToSquad(unit, attackSquad)) {
+						_squadData.assignUnitToSquad(unit, attackSquad);
+					}
+				}
             }
         }
     }
@@ -193,13 +197,12 @@ void CombatCommander::updateDropSquads()
     {
 		for (auto & unit : dropUnits)
 		{
-			unit->rightClick(dropShip);
+			if (dropSquadHasTransport && (unit->getDistance(basePosition) < 500)) {
+				unit->rightClick(dropShip);
+			}
 		}
-
         SquadOrder dropOrder(SquadOrderTypes::Drop, getMainAttackLocation(), 800, "Move To Enemy Base");
-		SquadOrder attackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Drop and Attack"); // this probably!
         dropSquad.setSquadOrder(dropOrder);
-		attackingSquad.setSquadOrder(attackOrder);
     }
 }
 

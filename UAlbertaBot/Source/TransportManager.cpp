@@ -118,6 +118,8 @@ void TransportManager::drawTransportInformation(int x = 0, int y = 0)
 
 void TransportManager::update()
 {
+	BWTA::BaseLocation * enemyBaseLocation = InformationManager::Instance().getMainBaseLocation(BWAPI::Broodwar->enemy());
+
     if (!_transportShip && getUnits().size() > 0)
     {
         _transportShip = *getUnits().begin();
@@ -137,6 +139,7 @@ void TransportManager::update()
 
 void TransportManager::moveTransport()
 {
+	BWTA::BaseLocation * enemyBaseLocation = InformationManager::Instance().getMainBaseLocation(BWAPI::Broodwar->enemy());
 	if (!_transportShip || !_transportShip->exists() || !(_transportShip->getHitPoints() > 0))
 	{
 		return;
@@ -151,6 +154,8 @@ void TransportManager::moveTransport()
 		return;
 	}
 	_from = _transportShip->getPosition();
+
+
 	//BWAPI::Broodwar->printf("FROM: [%d,%d]", _from.x, _from.y);
 	//BWAPI::Broodwar->printf("TO: [%d,%d]", _to.x, _to.y);
 	if (_to.isValid() && _from.isValid() && (_transportShip->getLoadedUnits().size() == 8))
@@ -171,7 +176,6 @@ void TransportManager::moveTroops()
 	}
 	//unload zealots if close enough or dying
 	int transportHP = _transportShip->getHitPoints() + _transportShip->getShields();
-	
 	BWTA::BaseLocation * enemyBaseLocation = InformationManager::Instance().getMainBaseLocation(BWAPI::Broodwar->enemy());
 
 	if ( (enemyBaseLocation && (_transportShip->getDistance(enemyBaseLocation->getPosition()) < 500) || (transportHP < 100)
@@ -188,6 +192,7 @@ void TransportManager::moveTroops()
 		{
 			return;
 		}
+
 
 		//else unload
 		_transportShip->unloadAll(_transportShip->getPosition());

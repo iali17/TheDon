@@ -250,6 +250,9 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 		//if (_enemyRace != BWAPI::Races::Protoss) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 10));
 
+			if (UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Refinery < 1)) {
+				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Refinery, 1));
+			}
 			if (numMarines > 10) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
 				goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Stim_Packs, 1));
@@ -259,7 +262,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Weapons, 1));
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
 			}
-			if (numMarines > 16) {
+			if (numMarines > 14 && numDropship < 1) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 1));
 			}
 			if (numMarines > 16 || numVultures > 4) {

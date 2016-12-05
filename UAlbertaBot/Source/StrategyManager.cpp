@@ -203,6 +203,7 @@ const MetaPairVector StrategyManager::getProtossBuildOrderGoal() const
 
 const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 {
+	BWAPI::Broodwar->printf(" build order goal for Terran Strategy ");
 	// the goal to return
 	std::vector<MetaPair> goal;
 
@@ -247,12 +248,8 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 	else if (Config::Strategy::StrategyName == "Terran_MarineDrop")
 	{
 
-		//if (_enemyRace != BWAPI::Races::Protoss) {
+			BWAPI::Broodwar->printf(" Marine drop reached ");
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 10));
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numFireBat + 2));
-			if (UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Refinery < 1)) {
-				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Refinery, 1));
-			}
 			if (numMarines > 10) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
 				goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Stim_Packs, 1));
@@ -265,14 +262,14 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 			if (numMarines > 14 && numDropship < 1) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 1));
 			}
-			if (numMarines > 16 || numVultures > 4) {
+			if (numMarines > 16) {
 				if (BWAPI::TechTypes::Tank_Siege_Mode.isValid()) {
 					goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));
 				}
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
 			}
 			
-			
+			BWAPI::Broodwar->printf(" Marine drop done ");
 
 		
 	}

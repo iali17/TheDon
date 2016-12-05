@@ -134,10 +134,6 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 	for (const auto & target : targets)
 	{
 		double distance = rangedUnit->getDistance(target);
-		double LTD = UnitUtil::CalculateLTD(target, rangedUnit);
-		int priority = getAttackPriority(rangedUnit, target);
-		bool targetIsThreat = LTD > 0;
-
 		if (target->getType().groundWeapon() != Unknown)
 		{
 			damage = target->getType().groundWeapon().damageAmount();
@@ -147,7 +143,7 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 
 		dps = damage / speed;
 		
-		if ((dps > highestdps) && (targethealth < lowesthealth))
+		if ((dps > highestdps) && (targethealth < lowesthealth) && distance <= BWAPI::UnitTypes::Terran_Marine.groundWeapon().maxRange())
 		{
 			highestdps = dps;
 			lowesthealth = targethealth;
@@ -155,21 +151,24 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 		}
 	}
 
-
-	/*for (const auto & target : targets)
+	if (closestTarget == nullptr)
 	{
-		double distance = rangedUnit->getDistance(target);
-		double LTD = UnitUtil::CalculateLTD(target, rangedUnit);
-		int priority = getAttackPriority(rangedUnit, target);
-		bool targetIsThreat = LTD > 0;
 
-		if (!closestTarget || (priority > highPriority) || (priority == highPriority && distance < closestDist))
+		for (const auto & target : targets)
 		{
-			closestDist = distance;
-			highPriority = priority;
-			closestTarget = target;
+			double distance = rangedUnit->getDistance(target);
+			double LTD = UnitUtil::CalculateLTD(target, rangedUnit);
+			int priority = getAttackPriority(rangedUnit, target);
+			bool targetIsThreat = LTD > 0;
+
+			if (!closestTarget || (priority > highPriority) || (priority == highPriority && distance < closestDist))
+			{
+				closestDist = distance;
+				highPriority = priority;
+				closestTarget = target;
+			}
 		}
-	}*/
+	}
 
 	return closestTarget;
 }

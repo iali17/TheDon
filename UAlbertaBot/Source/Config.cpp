@@ -24,7 +24,7 @@ namespace Config
 		//std::string ReadDir					= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
         std::string WriteDir                = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/";
 		//std::string WriteDir				= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
-        bool GasStealWithScout              = false;
+        bool GasStealWithScout              = true;
         bool ScoutHarassEnemy               = true;
         bool UseEnemySpecificStrategy       = true;
         bool FoundEnemySpecificStrategy     = false;

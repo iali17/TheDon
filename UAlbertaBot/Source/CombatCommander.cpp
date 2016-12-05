@@ -211,7 +211,7 @@ void CombatCommander::updateDropSquads()
 				unit->rightClick(dropShip);
 			}
 		}
-		BWAPI::Broodwar->printf("Should try to drop");
+	/*	BWAPI::Broodwar->printf("Should try to drop");*/
         SquadOrder dropOrder(SquadOrderTypes::Drop, getMainAttackLocation(), 800, "Move To Enemy Base");
         dropSquad.setSquadOrder(dropOrder);
     }

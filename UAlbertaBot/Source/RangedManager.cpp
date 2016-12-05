@@ -32,6 +32,7 @@ void RangedManager::assignTargetsOld(const BWAPI::Unitset & targets)
 			// if there are targets
 			if (!rangedUnitTargets.empty())
 			{
+				
 				// find the best target for this zealot
 				BWAPI::Unit target = getTarget(rangedUnit, rangedUnitTargets);
                 
@@ -39,7 +40,6 @@ void RangedManager::assignTargetsOld(const BWAPI::Unitset & targets)
 	            {
 		            BWAPI::Broodwar->drawLineMap(rangedUnit->getPosition(), rangedUnit->getTargetPosition(), BWAPI::Colors::Purple);
 	            }
-
 
 				// attack it
                 if (Config::Micro::KiteWithRangedUnits)

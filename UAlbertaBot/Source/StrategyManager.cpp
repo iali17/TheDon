@@ -249,7 +249,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 
 		//if (_enemyRace != BWAPI::Races::Protoss) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 10));
-
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numFireBat + 2));
 			if (UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Refinery < 1)) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Refinery, 1));
 			}
@@ -271,6 +271,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 				}
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
 			}
+			
 			
 
 		

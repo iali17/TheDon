@@ -8,7 +8,7 @@
         
     "BWAPI" : 
     {
-        "SetLocalSpeed"             : 5,
+        "SetLocalSpeed"             : 42,
         "SetFrameSkip"              : 0,
         "UserInput"                 : true,
         "CompleteMapInformation"    : false
@@ -82,7 +82,7 @@
         "Terran"                    : "Terran_MarineDrop",
         "Zerg"                      : "Zerg_ZerglingRush",
         
-        "ScoutGasSteal"             : true,
+        "ScoutGasSteal"             : false,
         "ScoutHarassEnemy"          : true,
         
         "ReadDirectory"             : "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/",

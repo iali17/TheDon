@@ -155,7 +155,25 @@ BWAPI::Unit MarineManager::getTarget(BWAPI::Unit rangedUnit, const BWAPI::Unitse
 			closestTarget = target;
 		}
 	}
-	
+
+	if (closestTarget == nullptr)
+	{
+
+		for (const auto & target : targets)
+		{
+			double distance = rangedUnit->getDistance(target);
+			double LTD = UnitUtil::CalculateLTD(target, rangedUnit);
+			int priority = getAttackPriority(rangedUnit, target);
+			bool targetIsThreat = LTD > 0;
+
+			if (!closestTarget || (priority > highPriority) || (priority == highPriority && distance < closestDist))
+			{
+				closestDist = distance;
+				highPriority = priority;
+				closestTarget = target;
+			}
+		}
+	}
 
 	return closestTarget;
 }

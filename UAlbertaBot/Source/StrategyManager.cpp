@@ -265,12 +265,6 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
 			}
 			
-			if (numMarines >= 10) { //BWAPI::Broodwar->enemy()->getRace()
-
-				//goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost, 2));
-				//goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 2));
-				BWAPI::Broodwar->printf("Switching to FireBat!!");
-			}
 
 		
 	}

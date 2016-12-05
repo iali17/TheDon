@@ -24,7 +24,7 @@ namespace Config
 		//std::string ReadDir					= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
         std::string WriteDir                = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/";
 		//std::string WriteDir				= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
-        bool GasStealWithScout              = true;
+        bool GasStealWithScout              = false;
         bool ScoutHarassEnemy               = true;
         bool UseEnemySpecificStrategy       = true;
         bool FoundEnemySpecificStrategy     = false;
@@ -37,7 +37,7 @@ namespace Config
         bool UsingScoutManager              = true;
         bool UsingCombatCommander           = true;
         bool UsingBuildOrderSearch          = true;     // toggle use of Build Order Search, currently no backup
-        bool UsingAutoObserver              = false;
+        bool UsingAutoObserver              = true;
         bool UsingStrategyIO                = true;    // toggle the use of file io for strategy
         bool UsingUnitCommandManager        = false;    // handles all unit commands
 		

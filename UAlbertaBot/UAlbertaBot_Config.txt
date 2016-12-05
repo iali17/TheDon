@@ -52,7 +52,7 @@
         "DrawUnitTargetInfo"        : false,
         "DrawBWTAInfo"              : false,
         "DrawMapGrid"               : false,
-        "DrawSquadInfo"             : true,
+        "DrawSquadInfo"             : false,
         "DrawWorkerInfo"            : false,
         "DrawMouseCursorInfo"       : false,
         "DrawBuildingInfo"          : false,
@@ -85,8 +85,8 @@
         "ScoutGasSteal"             : false,
         "ScoutHarassEnemy"          : true,
         
-        "ReadDirectory"             : "bwapi-data/read/",
-        "WriteDirectory"            : "bwapi-data/write/",
+        "ReadDirectory"             : "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/",
+        "WriteDirectory"            : "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/",
                 
         "UseEnemySpecificStrategy"  : true,
         "EnemySpecificStrategy"     :
@@ -103,9 +103,10 @@
             "Protoss_DTRush"        : { "Race" : "Protoss", "OpeningBuildOrder" : ["Probe", "Probe", "Probe", "Probe", "Pylon", "Probe", "Gateway", "Probe", "Assimilator", "Probe", "Cybernetics_Core", "Probe", "Citadel_of_Adun", "Probe", "Templar_Archives", "Gateway", "Dark_Templar", "Dark_Templar", "Pylon", "Dark_Templar", "Dark_Templar", "Probe", "Pylon", "Probe" ]},
             "Protoss_Drop"          : { "Race" : "Protoss", "OpeningBuildOrder" : ["Probe", "Probe", "Probe", "Probe", "Pylon", "Probe", "Probe", "Gateway", "Probe", "Assimilator", "Probe", "Probe", "Cybernetics_Core", "Probe", "Gateway", "Robotics Facility"]},
             "Terran_MarineRush"     : { "Race" : "Terran",  "OpeningBuildOrder" : ["SCV", "SCV", "SCV", "SCV", "SCV", "Supply Depot", "SCV"]},
-	    "Terran_MarineDrop"     : { "Race" : "Terran",  "OpeningBuildOrder" : ["SCV", "SCV", "SCV", "SCV", "SCV", "Supply Depot", "SCV", "Barracks", "Refinery", "SCV", "SCV", "SCV", "Factory", "Starport", "Control Tower", "Dropship", "Marine", "Marine", "Marine", "Marine", "Marine", "Marine", "Marine", "Marine","Marine", "Marine", "Marine", "Marine", "Marine", "Marine", "Marine", "Marine"]},
+	    "Terran_MarineDrop"     : { "Race" : "Terran",  "OpeningBuildOrder" : ["SCV", "SCV", "SCV", "SCV", "SCV", "Supply Depot", "SCV", "Barracks", "Marine", "Marine", "SCV", "Marine", "Marine", "Refinery"]}, 
             "Terran_TankPush"       : { "Race" : "Terran",  "OpeningBuildOrder" : ["SCV", "SCV", "SCV", "SCV", "SCV", "Supply Depot", "SCV", "Barracks", "Refinery", "SCV", "SCV", "SCV", "SCV", "Factory", "Factory", "SCV", "SCV", "SCV", "SCV", "Machine Shop", "Machine Shop", "Supply Depot", "Tank Siege Mode", "Siege Tank Tank Mode", "Siege Tank Tank Mode", "Siege Tank Tank Mode", "Siege Tank Tank Mode"]},
             "Terran_4RaxMarines"    : { "Race" : "Terran",  "OpeningBuildOrder" : ["Barracks", "SCV", "SCV", "Marine", "SCV", "Marine", "Supply Depot", "Marine", "Marine", "Marine", "Marine", "Marine", "Marine"]},
+	    "Terran_AirSuperiority" : { "Race" : "Terran",  "OpeningBuildOrder" : ["SCV", "SCV", "SCV", "SCV", "SCV", "Supply Depot", "SCV", "SCV", "Refinery", "SCV"]},
             "Terran_VultureRush"    : { "Race" : "Terran",  "OpeningBuildOrder" : ["SCV", "SCV", "SCV", "SCV", "SCV", "Supply Depot", "SCV", "SCV", "Barracks", "Refinery", "SCV", "SCV", "SCV", "SCV", "Supply Depot", "Factory", "SCV", "SCV", "SCV", "Vulture", "Vulture"]},
             "Zerg_ZerglingRush"     : { "Race" : "Zerg",    "OpeningBuildOrder" : ["Drone", "Spawning Pool", "Zergling", "Zergling", "Zergling", "Zergling"] },
             "Zerg_9Pool"            : { "Race" : "Zerg",    "OpeningBuildOrder" : ["Drone", "Drone", "Drone", "Drone", "Drone", "Spawning Pool", "Drone", "Extractor", "Overlord", "Drone", "Zergling", "Zergling", "Zergling", "Hydralisk Den", "Drone", "Drone", "Drone", "Drone"] },

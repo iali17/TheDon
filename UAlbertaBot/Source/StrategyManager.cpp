@@ -228,6 +228,8 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
         if (numMarines > 5)
         {
             goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Weapons, 1));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
         }
 		if (numMarines > 16) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
@@ -235,8 +237,8 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
     }
 	//Added by Alex Dec 4
 	else if (Config::Strategy::StrategyName == "Terran_AirSuperiority") {
-		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Wraith, numWraith + 4));
-		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 4));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Wraith, numWraith + 8));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 6));
 		if (numWraith > 8) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Battlecruiser, 2));
 		}
@@ -254,6 +256,8 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 			}
 			if (numBay < 1 && numMarines > 15) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
+				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Weapons, 1));
+				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
 			}
 			if (numMarines > 16) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 1));

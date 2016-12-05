@@ -68,7 +68,7 @@
         "UseCombatCommander"        : true,
         "UseBuildOrderSearch"       : true,
         "UseStrategyIO"             : true,
-        "UseAutoObserver"           : false
+        "UseAutoObserver"           : true
     },
     
     "Tools" :
@@ -82,7 +82,7 @@
         "Terran"                    : "Terran_MarineDrop",
         "Zerg"                      : "Zerg_ZerglingRush",
         
-        "ScoutGasSteal"             : false,
+        "ScoutGasSteal"             : true,
         "ScoutHarassEnemy"          : true,
         
         "ReadDirectory"             : "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/",

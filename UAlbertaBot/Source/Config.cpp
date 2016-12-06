@@ -21,7 +21,7 @@ namespace Config
     namespace Strategy
     {
         std::string ProtossStrategyName     = "Protoss_ZealotRush";
-        std::string TerranStrategyName      = "Terran_HellStorm";
+        std::string TerranStrategyName      = "Terran_MarineDrop";
         std::string ZergStrategyName        = "Zerg_6pool";
         std::string StrategyName            = "Protoss_ZealotRush";
         std::string ReadDir                 = "bwapi-data/write/";

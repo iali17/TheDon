@@ -65,10 +65,11 @@ public:
 
 class BuildingData 
 {
-    std::vector<Building>                   _buildings;
-
+   
+	std::vector<Building>                   _buildings;
 public:
 
+	
 	BuildingData();
 	
     std::vector<Building> & getBuildings();

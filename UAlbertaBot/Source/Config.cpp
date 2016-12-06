@@ -7,22 +7,26 @@ namespace Config
     {
         bool ConfigFileFound                = false;
         bool ConfigFileParsed               = false;
-		std::string ConfigFileLocation		=	"E:/Homework/CMPUT350/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
+		//::string ConfigFileLocation		=	"E:/Homework/CMPUT350/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
         //std::string ConfigFileLocation      = "C:/Users/Hussain/Desktop/git/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
 
-       /* std::string ConfigFileLocation      = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";*/
+
+        std::string ConfigFileLocation      = "bwapi-data/UAlbertaBot_Config.txt";
+
+       // std::string ConfigFileLocation      = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";*/
+
 
     }
 
     namespace Strategy
     {
         std::string ProtossStrategyName     = "Protoss_ZealotRush";
-        std::string TerranStrategyName      = "Terran_MarineDrop";
-        std::string ZergStrategyName        = "Zerg_3HatchMuta";
+        std::string TerranStrategyName      = "Terran_HellStorm";
+        std::string ZergStrategyName        = "Zerg_6pool";
         std::string StrategyName            = "Protoss_ZealotRush";
-        std::string ReadDir                 = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/";
+        std::string ReadDir                 = "bwapi-data/write/";
 		//std::string ReadDir					= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
-        std::string WriteDir                = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/bin/write/";
+        std::string WriteDir                = "bwapi-data/write/";
 		//std::string WriteDir				= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
         bool GasStealWithScout              = false;
         bool ScoutHarassEnemy               = true;

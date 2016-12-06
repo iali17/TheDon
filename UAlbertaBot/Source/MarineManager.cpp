@@ -44,7 +44,7 @@ void MarineManager::assignTargetsOld(const BWAPI::Unitset & targets)
 				//if not already stimpacked, use stimpack
 				if (!(rangedUnit->isStimmed()))
 				{
-					if (rangedUnit->getHitPoints() > 25)
+					if (rangedUnit->getHitPoints() > 35)
 					{
 						z = rangedUnit->useTech(0);
 						if (z == true)

@@ -1,4 +1,5 @@
 #include "BuildOrderQueue.h"
+#include "UnitUtil.h"
 
 using namespace UAlbertaBot;
 
@@ -74,9 +75,14 @@ void BuildOrderQueue::queueItem(BuildOrderItem b)
 	}
 
 	// push the item into the queue
-	if (b.priority <= lowestPriority) 
+	if (b.priority <= lowestPriority ) 
 	{
-		queue.push_front(b);
+		if (b.metaType.getUnitType() == BWAPI::UnitTypes::Terran_Marine && UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Barracks) > 2) {
+			queue.push_back(b);
+		}
+		else {
+			queue.push_front(b);
+		}
 	}
 	else
 	{

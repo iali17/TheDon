@@ -1,5 +1,6 @@
 #include "CombatCommander.h"
 #include "UnitUtil.h"
+#include "BuildingManager.h"
 
 using namespace UAlbertaBot;
 
@@ -8,6 +9,7 @@ const size_t AttackPriority = 1;
 const size_t BaseDefensePriority = 2;
 const size_t ScoutDefensePriority = 3;
 const size_t DropPriority = 4;
+const size_t BunkerDefence = 5;
 
 CombatCommander::CombatCommander() 
     : _initialized(false)
@@ -19,6 +21,8 @@ void CombatCommander::initializeSquads()
 {
     SquadOrder idleOrder(SquadOrderTypes::Idle, BWAPI::Position(BWAPI::Broodwar->self()->getStartLocation()), 100, "Chill Out");
 	_squadData.addSquad("Idle", Squad("Idle", idleOrder, IdlePriority));
+
+	//SquadOrder bunkerDefenceOrder(SquadOrderTypes::Defend, )
 
     // the main attack squad that will pressure the enemy's closest base location
     SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
@@ -95,7 +99,6 @@ void CombatCommander::updateAttackSquads()
     Squad & mainAttackSquad = _squadData.getSquad("MainAttack");
 	int unitSquadCounter = 0;
 
-	
 	for (auto & unit : _combatUnits)
 	{
 		if (unit->getType() == BWAPI::UnitTypes::Zerg_Scourge && UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Zerg_Hydralisk) < 30)
@@ -119,7 +122,7 @@ void CombatCommander::updateAttackSquads()
 	//SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 	//SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 	//mainAttackSquad.setSquadOrder(mainAttackOrder);
-	if (mainAttackSquad.getUnits().size() > 10)
+	if (mainAttackSquad.getUnits().size() > 15)
 	{
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);

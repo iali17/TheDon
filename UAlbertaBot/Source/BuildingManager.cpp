@@ -392,6 +392,7 @@ std::vector<BWAPI::UnitType> BuildingManager::buildingsQueued()
 }
 
 
+
 BWAPI::TilePosition BuildingManager::getBuildingLocation(const Building & b)
 {
     int numPylons = BWAPI::Broodwar->self()->completedUnitCount(BWAPI::UnitTypes::Protoss_Pylon);

@@ -5,9 +5,9 @@ using namespace UAlbertaBot;
 
 const size_t IdlePriority = 0;
 const size_t AttackPriority = 1;
-const size_t BaseDefensePriority = 2;
+const size_t BaseDefensePriority = 4;
 const size_t ScoutDefensePriority = 3;
-const size_t DropPriority = 4;
+const size_t DropPriority = 2;
 
 CombatCommander::CombatCommander() 
     : _initialized(false)
@@ -40,6 +40,7 @@ void CombatCommander::initializeSquads()
 	{
 		SquadOrder marineDrop(SquadOrderTypes::Drop, ourBasePosition, 900, "Wait for transport");
 		_squadData.addSquad("Drop", Squad("Drop", marineDrop, DropPriority));
+		
 	}
 
     _initialized = true;
@@ -157,14 +158,22 @@ void CombatCommander::updateDropSquads()
         }
         else
         {
+			if ((dropSquadHasTransport) && (dropShip->getDistance(getMainAttackLocation()) < 1000)) {
+				if (_squadData.canAssignUnitToSquad(unit, attackSquad)) {
+					_squadData.assignUnitToSquad(unit, attackSquad);
+				}
+				return;
+			}
+
 			//Maybe loop twice, one to find the drop ship then start clicking on them.
 			if (dropSquadHasTransport && (unit->getDistance(basePosition) < 500))
 			{
 				unit->rightClick(dropShip);
+				transportSpotsRemaining -= unit->getType().spaceRequired();
 			}
-			transportSpotsRemaining -= unit->getType().spaceRequired();
         }
     }
+
 
     // if there are still units to be added to the drop squad, do it
     if (transportSpotsRemaining > 0 || !dropSquadHasTransport)
@@ -172,6 +181,12 @@ void CombatCommander::updateDropSquads()
         // take our first amount of combat units that fill up a transport and add them to the drop squad
         for (auto & unit : _combatUnits)
         {
+			if ((dropSquadHasTransport) && (dropShip->getDistance(getMainAttackLocation()) < 1000)) {
+				if (_squadData.canAssignUnitToSquad(unit, attackSquad)) {
+					_squadData.assignUnitToSquad(unit, attackSquad);
+				}
+				return;
+			}
             // if this is a transport unit and we don't have one in the squad yet, add it
             if (!dropSquadHasTransport && (unit->getType().spaceProvided() > 0 && unit->isFlying()))
             {

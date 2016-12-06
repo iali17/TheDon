@@ -122,7 +122,12 @@ void TransportManager::update()
 
     if (!_transportShip && getUnits().size() > 0)
     {
-        _transportShip = *getUnits().begin();
+		for (auto & unit : getUnits()) {
+			if (unit->isFlying()) {
+				setTransportShip(unit);
+				BWAPI::Broodwar->printf("SET SHIP");
+			}
+		}
     }
 
 	// calculate enemy region vertices if we haven't yet
@@ -131,8 +136,8 @@ void TransportManager::update()
 		calculateMapEdgeVertices();
 	}
 
-	moveTroops();
 	moveTransport();
+	moveTroops();
 	
 	drawTransportInformation();
 }
@@ -155,10 +160,7 @@ void TransportManager::moveTransport()
 	}
 	_from = _transportShip->getPosition();
 
-	//if (_transportShip->getLoadedUnits().size() == 8) {
-	//	setTo(enemyBaseLocation->getPosition());
-	//	BWAPI::Broodwar->printf("FULL");
-	//}
+
 	//BWAPI::Broodwar->printf("FROM: [%d,%d]", _from.x, _from.y);
 	//BWAPI::Broodwar->printf("TO: [%d,%d]", _to.x, _to.y);
 	if (_to.isValid() && _from.isValid() && (_transportShip->getLoadedUnits().size() == 8))

@@ -9,7 +9,7 @@ const size_t AttackPriority = 1;
 const size_t BaseDefensePriority = 4;
 const size_t ScoutDefensePriority = 3;
 const size_t DropPriority = 4;
-//const size_t BunkerDefence = 5;
+const size_t BunkerDefencePriority = 5;
 
 CombatCommander::CombatCommander() 
     : _initialized(false)
@@ -19,16 +19,19 @@ CombatCommander::CombatCommander()
 
 void CombatCommander::initializeSquads()
 {
+	BWAPI::Position ourBasePosition = BWAPI::Position(BWAPI::Broodwar->self()->getStartLocation());
+
     SquadOrder idleOrder(SquadOrderTypes::Idle, BWAPI::Position(BWAPI::Broodwar->self()->getStartLocation()), 100, "Chill Out");
 	_squadData.addSquad("Idle", Squad("Idle", idleOrder, IdlePriority));
 
-	//SquadOrder bunkerDefenceOrder(SquadOrderTypes::Defend, )
+	SquadOrder bunkerDefenceOrder(SquadOrderTypes::Defend, ourBasePosition, 900, "Get in bunker");
+	_squadData.addSquad("BunkerSquad", Squad("BunkerSquad", bunkerDefenceOrder, BunkerDefencePriority));
+
 
     // the main attack squad that will pressure the enemy's closest base location
     SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 	_squadData.addSquad("MainAttack", Squad("MainAttack", mainAttackOrder, AttackPriority));
 
-    BWAPI::Position ourBasePosition = BWAPI::Position(BWAPI::Broodwar->self()->getStartLocation());
 
     // the scout defense squad will handle chasing the enemy worker scout
     SquadOrder enemyScoutDefense(SquadOrderTypes::Defend, ourBasePosition, 900, "Get the scout");
@@ -73,15 +76,52 @@ void CombatCommander::update(const BWAPI::Unitset & combatUnits)
 	if (isSquadUpdateFrame())
 	{
         updateIdleSquad();
+		updateBunkerSquad();
 		updateDropSquads();
         updateScoutDefenseSquad();
 		updateDefenseSquads();
 		updateAttackSquads();
 		
-		//updateBunkerDefence();
 	}
 
 	_squadData.update();
+}
+
+void CombatCommander::updateBunkerSquad()
+{
+	Squad & bunkerSquad = _squadData.getSquad("BunkerSquad");
+	auto & bunkerUnits = bunkerSquad.getUnits();
+	int marines = 0;
+	bool bunkerFound = false;
+	BWAPI::UnitInterface *bunker;
+
+	if (!bunkerFound) {
+		for (auto & u : BWAPI::Broodwar->self()->getUnits())
+		{
+			if (u->getType() == BWAPI::UnitTypes::Terran_Bunker){
+				bunker = u;
+				bunkerFound = true;
+			}
+		}
+	}
+
+	if (bunkerFound && bunker->getLoadedUnits().size() < 4){
+		if (marines < 4) {
+			for (auto & unit : _combatUnits)
+			{
+				if ((unit->getType() == BWAPI::UnitTypes::Terran_Marine) && (_squadData.canAssignUnitToSquad(unit, bunkerSquad))) {
+					_squadData.assignUnitToSquad(unit, bunkerSquad);
+					++marines;
+				}
+			}
+		}
+
+		for (auto & unit : bunkerUnits){
+			unit->rightClick(bunker);
+		}
+	}
+
+
 }
 
 void CombatCommander::updateIdleSquad()

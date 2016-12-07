@@ -223,7 +223,7 @@ void BuildingManager::checkForStartedConstruction()
 // STEP 5: IF WE ARE TERRAN, THIS MATTERS, SO: LOL plz workz now maybe lol
 void BuildingManager::checkForDeadTerranBuilders() {
 	for (auto & b : _buildings) {
-		if (!b.builderUnit->isConstructing())
+		if (b.status == BuildingStatus::UnderConstruction)
 		{
 			if (b.builderUnit->getHitPoints() <= 0)
 			{

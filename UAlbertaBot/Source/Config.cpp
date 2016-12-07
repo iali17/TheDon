@@ -7,7 +7,7 @@ namespace Config
     {
         bool ConfigFileFound                = false;
         bool ConfigFileParsed               = false;
-		//::string ConfigFileLocation		=	"E:/Homework/CMPUT350/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
+		/*std::string ConfigFileLocation		=	"E:/Homework/CMPUT350/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";*/
         //std::string ConfigFileLocation      = "C:/Users/Hussain/Desktop/git/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
 
 

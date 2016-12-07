@@ -73,7 +73,7 @@ const bool StrategyManager::shouldExpandNow() const
     }
 
     // we will make expansion N after array[N] minutes have passed
-    std::vector<int> expansionTimes = {5, 10, 20, 30, 40 , 50};
+    std::vector<int> expansionTimes = {6, 10, 20, 30, 40 , 50};
 
     for (size_t i(0); i < expansionTimes.size(); ++i)
     {
@@ -225,18 +225,15 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 
     if (Config::Strategy::StrategyName == "Terran_MarineRush")
     {
-		BWAPI::Broodwar->printf("%d", numMarines + 8);
+		//BWAPI::Broodwar->printf("%d", numMarines + 8);
 	    goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
 
-        if (numMarines > 8)
+        if (numMarines > 12)
         {
             goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Weapons, 1));
 			//goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
         }
-		if (numMarines > 10) {
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, 4));
-		}
     }
 	//Added by Alex Dec 4
 	else if (Config::Strategy::StrategyName == "Terran_AirSuperiority") {
@@ -249,7 +246,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 	//Added by Alex Nov 14
 	else if (Config::Strategy::StrategyName == "Terran_MarineDrop")
 	{
-		BWAPI::Broodwar->printf("%d", numMarines);
+		//BWAPI::Broodwar->printf("%d", numMarines);
 		static int Marinescale = 2;
 		Marinescale += 2;
 		if (Marinescale >= 16) {
@@ -268,13 +265,12 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 
 			if (numMarines > 25) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Weapons, 1));
-				//goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
+				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
 			}
 
 			if (numMedics > 2 && numDropship < 1) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 1));
 			}
-
 			
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + Marinescale));
 
@@ -282,20 +278,8 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 	}
     else if (Config::Strategy::StrategyName == "Terran_HellStorm")
     {
-		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 4));
-		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
-		if (numMarines > 20) {
-			if (BWAPI::TechTypes::Tank_Siege_Mode.isValid()) {
-				goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));
-			}
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
-		}
-		//goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 2));
-	    //goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 8));
-		//if (numFireBat > 16) {
-		//	goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
-		//	goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost , numGhost + 2));
-		//}
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 8));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 8));
 
     }
     else if (Config::Strategy::StrategyName == "Terran_AVultureRush")
@@ -326,6 +310,11 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
         BWAPI::Broodwar->printf("Warning: No build order goal for Terran Strategy: %s", Config::Strategy::StrategyName.c_str());
     }
 
+
+	if (BWAPI::Broodwar->getFrameCount() >= 25000) { //late game tanks
+		goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, numTanks + 4));
+	}
 
 	if (InformationManager::Instance().enemyHasCloakedUnits())
 	{

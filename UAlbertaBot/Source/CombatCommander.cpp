@@ -167,7 +167,7 @@ void CombatCommander::updateAttackSquads()
 	//mainAttackSquad.setSquadOrder(mainAttackOrder);
 	if (mainAttackSquad.getUnits().size() > 15 || BWAPI::Broodwar->getFrameCount() >= 20000)
 	{
-		
+		//BWAPI::Broodwar->printf("marine ADDED to the attacksquad");
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);
 	}

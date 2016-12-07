@@ -74,14 +74,14 @@ namespace Config
         bool DrawGameInfo                   = true;
         bool DrawUnitHealthBars             = true;
         bool DrawProductionInfo             = true;
-        bool DrawBuildOrderSearchInfo       = true;
+        bool DrawBuildOrderSearchInfo       = false;
         bool DrawScoutInfo                  = false;
         bool DrawResourceInfo               = false;
         bool DrawWorkerInfo                 = false;
         bool DrawModuleTimers               = false;
-        bool DrawReservedBuildingTiles      = true;
+        bool DrawReservedBuildingTiles      = false;
         bool DrawCombatSimulationInfo       = false;
-        bool DrawBuildingInfo               = true;
+        bool DrawBuildingInfo               = false;
         bool DrawMouseCursorInfo            = false;
         bool DrawEnemyUnitInfo              = false;
         bool DrawBWTAInfo                   = false;

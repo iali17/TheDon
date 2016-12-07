@@ -232,20 +232,20 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
         {
             goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Engineering_Bay, 1));
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Weapons, 1));
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
+			//goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
         }
-		if (numMarines > 16) {
+		if (numMarines > 10) {
 			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
 		}
     }
 	//Added by Alex Dec 4
 	else if (Config::Strategy::StrategyName == "Terran_AirSuperiority") {
-		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Wraith, numWraith + 8));
+		
 		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 6));
-		if (numWraith > 8) {
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Battlecruiser, 2));
-		}
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Wraith,numWraith + 6));
 	}
+
+
 	//Added by Alex Nov 14
 	else if (Config::Strategy::StrategyName == "Terran_MarineDrop")
 	{
@@ -255,7 +255,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 		if (Marinescale >= 16) {
 			Marinescale = 12;
 		}
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + Marinescale));
+			
 
 			if (numMarines > 20) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
@@ -268,39 +268,37 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 
 			if (numMarines > 25) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Weapons, 1));
-				goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
+				//goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
 			}
 
-			if (numMedics > 4 && numDropship < 1) {
+			if (numMedics > 2 && numDropship < 1) {
 				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Dropship, 1));
 			}
 
-			if (numMarines > 30) {
-				if (BWAPI::TechTypes::Tank_Siege_Mode.isValid()) {
-					goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));
-				}
-				goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
-			}
 			
-			if (BWAPI::Broodwar->enemy()->getRace() == BWAPI::Races::Protoss) {
-				if (numMarines > 8) {
-					goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Vulture, numVultures + 2));
-				}
-			}
-			
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + Marinescale));
 
 		
 	}
     else if (Config::Strategy::StrategyName == "Terran_HellStorm")
     {
-	    goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 8));
-		if (numFireBat > 16) {
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost , numGhost + 2));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 4));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
+		if (numMarines > 20) {
+			if (BWAPI::TechTypes::Tank_Siege_Mode.isValid()) {
+				goal.push_back(std::pair<MetaType, int>(BWAPI::TechTypes::Tank_Siege_Mode, 1));
+			}
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, 6));
 		}
+		//goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Marine, numMarines + 2));
+	    //goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Firebat, numFireBat + 8));
+		//if (numFireBat > 16) {
+		//	goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
+		//	goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Ghost , numGhost + 2));
+		//}
 
     }
-    else if (Config::Strategy::StrategyName == "Terran_VultureRush")
+    else if (Config::Strategy::StrategyName == "Terran_AVultureRush")
     {
         goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Vulture, numVultures + 8));
 
@@ -311,6 +309,10 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
             goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Siege_Tank_Tank_Mode, numTanks + 4));
 
         }
+		if (numTanks > 4) {
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Goliath, numGoliath + 6));
+		}
+
     }
 	else if (Config::Strategy::StrategyName == "Terran_TankPush")
     {
@@ -327,7 +329,8 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 
 	if (InformationManager::Instance().enemyHasCloakedUnits())
 	{
-		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Science_Vessel, 1));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Missile_Turret, 3));
+		goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Science_Vessel, 2));
 	}
     if (shouldExpandNow())
     {
@@ -511,7 +514,7 @@ void StrategyManager::setLearnedStrategy()
 
     int totalGamesPlayed = 0;
     int strategyGamesPlayed = currentStrategy._wins + currentStrategy._losses;
-    double winRate = strategyGamesPlayed > 0 ? currentStrategy._wins / static_cast<double>(strategyGamesPlayed) : 0;
+    double winRate = strategyGamesPlayed > 0 ? currentStrategy._wins / static_cast<double>(strategyGamesPlayed) : 0.0;
 
     // if we are using an enemy specific strategy
     if (Config::Strategy::FoundEnemySpecificStrategy)
@@ -551,14 +554,17 @@ void StrategyManager::setLearnedStrategy()
             continue;
         }
 
+		
         int sGamesPlayed = strategy._wins + strategy._losses;
-        double sWinRate = sGamesPlayed > 0 ? currentStrategy._wins / static_cast<double>(strategyGamesPlayed) : 0;
+        double sWinRate = sGamesPlayed > 0 ? currentStrategy._wins / static_cast<double>(strategyGamesPlayed) : C;
         double ucbVal = C * sqrt( log( (double)totalGamesPlayed / sGamesPlayed ) );
-        double val = sWinRate + ucbVal;
+		double val = sWinRate + ucbVal;
 
+		//BWAPI::Broodwar->printf("%s", strategy._name);
+		BWAPI::Broodwar->printf("%f", val);
         if (val > bestUCBStrategyVal)
         {
-			BWAPI::Broodwar->printf("%s" , strategy._name);
+			
             bestUCBStrategy = strategy._name;
             bestUCBStrategyVal = val;
         }

@@ -220,8 +220,18 @@ void BuildingManager::checkForStartedConstruction()
     }
 }
 
-// STEP 5: IF WE ARE TERRAN, THIS MATTERS, SO: LOL
-void BuildingManager::checkForDeadTerranBuilders() {}
+// STEP 5: IF WE ARE TERRAN, THIS MATTERS, SO: LOL plz workz now maybe lol
+void BuildingManager::checkForDeadTerranBuilders() {
+	for (auto & b : _buildings) {
+		if (!b.builderUnit->isConstructing())
+		{
+			if (b.builderUnit->getHitPoints() <= 0)
+			{
+				b.status = BuildingStatus::Unassigned;
+			}
+		}
+	}
+}
 
 // STEP 6: CHECK FOR COMPLETED BUILDINGS
 void BuildingManager::checkForCompletedBuildings()

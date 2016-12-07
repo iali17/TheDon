@@ -9,7 +9,7 @@ const size_t AttackPriority = 1;
 const size_t BaseDefensePriority = 4;
 const size_t ScoutDefensePriority = 3;
 const size_t DropPriority = 4;
-const size_t BunkerDefence = 5;
+//const size_t BunkerDefence = 5;
 
 CombatCommander::CombatCommander() 
     : _initialized(false)
@@ -77,6 +77,8 @@ void CombatCommander::update(const BWAPI::Unitset & combatUnits)
         updateScoutDefenseSquad();
 		updateDefenseSquads();
 		updateAttackSquads();
+		
+		//updateBunkerDefence();
 	}
 
 	_squadData.update();
@@ -125,6 +127,7 @@ void CombatCommander::updateAttackSquads()
 	//mainAttackSquad.setSquadOrder(mainAttackOrder);
 	if (mainAttackSquad.getUnits().size() > 15)
 	{
+		
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 		mainAttackSquad.setSquadOrder(mainAttackOrder);
 	}

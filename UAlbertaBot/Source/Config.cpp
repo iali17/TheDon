@@ -11,7 +11,7 @@ namespace Config
         //std::string ConfigFileLocation      = "C:/Users/Hussain/Desktop/git/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";
 
 
-        std::string ConfigFileLocation      = "bwapi-data/AI/UAlbertaBot_Config.txt";
+        std::string ConfigFileLocation      = "bwapi-data/UAlbertaBot_Config.txt";
 
        // std::string ConfigFileLocation      = "C:/Users/AlexB_000/Documents/GitHub/TheDon/UAlbertaBot/UAlbertaBot_Config.txt";*/
 

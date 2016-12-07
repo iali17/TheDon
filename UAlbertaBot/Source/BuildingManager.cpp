@@ -222,12 +222,17 @@ void BuildingManager::checkForStartedConstruction()
 
 // STEP 5: IF WE ARE TERRAN, THIS MATTERS, SO: LOL plz workz now maybe lol
 void BuildingManager::checkForDeadTerranBuilders() {
-	for (auto & b : _buildings) {
-		if (b.status == BuildingStatus::UnderConstruction)
-		{
-			if (b.builderUnit->getHitPoints() <= 0)
-			{
+
+	for (auto & b : _buildings) { 
+		if (b.status == BuildingStatus::UnderConstruction) {
+			if (b.builderUnit->getHitPoints() <= 0) {
+				b.builderUnit = nullptr;
 				b.status = BuildingStatus::Unassigned;
+				
+				BWAPI::Broodwar->printf("reassign worker"); 
+				b.buildCommandGiven = false;
+					
+				BWAPI::Broodwar->printf("FOUND");
 			}
 		}
 	}

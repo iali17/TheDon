@@ -30,7 +30,7 @@ namespace Config
 		//std::string WriteDir				= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
         bool GasStealWithScout              = false;
         bool ScoutHarassEnemy               = false;
-        bool UseEnemySpecificStrategy       = true;
+        bool UseEnemySpecificStrategy       = false;
         bool FoundEnemySpecificStrategy     = false;
     }
 
@@ -74,14 +74,14 @@ namespace Config
         bool DrawGameInfo                   = true;
         bool DrawUnitHealthBars             = true;
         bool DrawProductionInfo             = true;
-        bool DrawBuildOrderSearchInfo       = false;
+        bool DrawBuildOrderSearchInfo       = true;
         bool DrawScoutInfo                  = false;
         bool DrawResourceInfo               = false;
         bool DrawWorkerInfo                 = false;
         bool DrawModuleTimers               = false;
         bool DrawReservedBuildingTiles      = true;
         bool DrawCombatSimulationInfo       = false;
-        bool DrawBuildingInfo               = false;
+        bool DrawBuildingInfo               = true;
         bool DrawMouseCursorInfo            = false;
         bool DrawEnemyUnitInfo              = false;
         bool DrawBWTAInfo                   = false;

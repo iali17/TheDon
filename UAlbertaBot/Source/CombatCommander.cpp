@@ -165,7 +165,7 @@ void CombatCommander::updateAttackSquads()
 	//SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 	//SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");
 	//mainAttackSquad.setSquadOrder(mainAttackOrder);
-	if (mainAttackSquad.getUnits().size() > 15)
+	if (mainAttackSquad.getUnits().size() > 15 || BWAPI::Broodwar->getFrameCount() >= 20000)
 	{
 		
 		SquadOrder mainAttackOrder(SquadOrderTypes::Attack, getMainAttackLocation(), 800, "Attack Enemy Base");

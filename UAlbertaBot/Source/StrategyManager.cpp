@@ -434,7 +434,7 @@ void StrategyManager::readResults()
             ss >> wins;
             ss >> losses;
 
-            //BWAPI::Broodwar->printf("Results Found: %s %d %d", strategyName.c_str(), wins, losses);
+            BWAPI::Broodwar->printf("Results Found: %s %d %d", strategyName.c_str(), wins, losses);
 
             if (_strategies.find(strategyName) == _strategies.end())
             {
@@ -544,7 +544,8 @@ void StrategyManager::setLearnedStrategy()
     // calculate the UCB value and store the highest
     double C = 0.5;
     std::string bestUCBStrategy;
-    double bestUCBStrategyVal = std::numeric_limits<double>::lowest();
+	int bestUCBStrategyVal = -1;
+    //double bestUCBStrategyVal = std::numeric_limits<double>::lowest();
     for (auto & kv : _strategies)
     {
 		
@@ -554,21 +555,26 @@ void StrategyManager::setLearnedStrategy()
             continue;
         }
 
-		
+		//BWAPI::Broodwar->printf("%s", strategy._name.c_str());
         int sGamesPlayed = strategy._wins + strategy._losses;
-        double sWinRate = sGamesPlayed > 0 ? currentStrategy._wins / static_cast<double>(strategyGamesPlayed) : C;
-        double ucbVal = C * sqrt( log( (double)totalGamesPlayed / sGamesPlayed ) );
-		double val = sWinRate + ucbVal;
+		int sWinRate;
+		if (sGamesPlayed <= 0) {
+			//BWAPI::Broodwar->printf("No games yet!!");
+			sWinRate = 0;
+		} else {
+			sWinRate = strategy._wins - strategy._losses;
+		}
 
-		//BWAPI::Broodwar->printf("%s", strategy._name);
-		BWAPI::Broodwar->printf("%f", val);
+		int val = sWinRate;
+
+		BWAPI::Broodwar->printf("%s", strategy._name.c_str());
+		BWAPI::Broodwar->printf("%d", val);
         if (val > bestUCBStrategyVal)
         {
-			
             bestUCBStrategy = strategy._name;
             bestUCBStrategyVal = val;
         }
     }
-	BWAPI::Broodwar->printf("Learning!!");
+	//BWAPI::Broodwar->printf("Learning!!");
     Config::Strategy::StrategyName = bestUCBStrategy;
 }

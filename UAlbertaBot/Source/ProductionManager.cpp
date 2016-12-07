@@ -352,6 +352,18 @@ void ProductionManager::create(BWAPI::Unit producer, BuildOrderItem & item)
 				}
 			}
 		}
+		//check for too many barracks
+		if (t.getUnitType() == BWAPI::UnitTypes::Terran_Barracks) {
+			if (UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Barracks > 6)) {
+				return;
+			}
+		}
+		//check for too many barracks
+		if (t.getUnitType() == BWAPI::UnitTypes::Terran_Factory) {
+			if (UnitUtil::GetAllUnitCount(BWAPI::UnitTypes::Terran_Factory > 4)) {
+				return;
+			}
+		}
 
 		// send the building task to the building manager
         BuildingManager::Instance().addBuildingTask(t.getUnitType(), BWAPI::Broodwar->self()->getStartLocation(), item.isGasSteal);

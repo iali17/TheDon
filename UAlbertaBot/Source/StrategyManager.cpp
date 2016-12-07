@@ -235,7 +235,7 @@ const MetaPairVector StrategyManager::getTerranBuildOrderGoal() const
 			//goal.push_back(std::pair<MetaType, int>(BWAPI::UpgradeTypes::Terran_Infantry_Armor, 1));
         }
 		if (numMarines > 10) {
-			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, numMedics + 2));
+			goal.push_back(std::pair<MetaType, int>(BWAPI::UnitTypes::Terran_Medic, 4));
 		}
     }
 	//Added by Alex Dec 4
@@ -544,7 +544,7 @@ void StrategyManager::setLearnedStrategy()
     // calculate the UCB value and store the highest
     double C = 0.5;
     std::string bestUCBStrategy;
-	int bestUCBStrategyVal = -1;
+	int bestUCBStrategyVal = -100;
     //double bestUCBStrategyVal = std::numeric_limits<double>::lowest();
     for (auto & kv : _strategies)
     {

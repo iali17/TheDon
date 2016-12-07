@@ -29,7 +29,7 @@ namespace Config
         std::string WriteDir                = "bwapi-data/write/";
 		//std::string WriteDir				= "E:/Homework/CMPUT350/TheDon/UAlbertaBot/bin/write/";
         bool GasStealWithScout              = false;
-        bool ScoutHarassEnemy               = false;
+        bool ScoutHarassEnemy               = true;
         bool UseEnemySpecificStrategy       = false;
         bool FoundEnemySpecificStrategy     = false;
     }
